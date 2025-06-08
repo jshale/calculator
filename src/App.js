@@ -1,23 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Keypad from "./Keypad.js";
+import IO from "./IO.js";
+import History from "./History.js";
+import { useState } from "react";
 
 function App() {
+  const [curIO, setCurIO] = useState("");
+  const [historyArr, setHistoryArr] = useState([]);
+
+  function handleCalc() {
+    if (!curIO) return;
+    const newHistoryItem = {
+      equation: curIO,
+      result: eval(curIO),
+      id: historyArr.length + 1,
+    };
+    setHistoryArr([newHistoryItem, ...historyArr]);
+    setCurIO(eval(curIO));
+    handleClear();
+    console.log(newHistoryItem.id);
+  }
+
+  function handleClear() {
+    setCurIO("");
+  }
+
+  function handleInput(key) {
+    // console.log(key);
+    setCurIO((cur) => cur + key);
+  }
+
+  function handleParen() {
+    if (curIO.includes("(")) {
+      handleInput(")");
+    } else {
+      handleInput("(");
+    }
+  }
+
+  function handlePasteHistory(history) {
+    setCurIO((cur) => cur + history);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <div className="IOcontainer">
+          <IO className="IO" curIO={curIO} setCurIO={setCurIO} />
+        </div>
+        <Keypad
+          // className="keypad"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "10px",
+          }}
+          onCalc={handleCalc}
+          onHandleClear={handleClear}
+          onHandleInput={handleInput}
+          onHandleParen={handleParen}
+          curIO={curIO}
+        />
+      </div>
+      <div className="history">
+        <History
+          className="history"
+          historyArr={historyArr}
+          onPasteHistory={handlePasteHistory}
+        />
+      </div>
     </div>
   );
 }
