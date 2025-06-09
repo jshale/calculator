@@ -1,7 +1,10 @@
 .App {
   text-align: center;
   display: flex;
-  background-color: rgb(50, 50, 97);
+}
+
+.body {
+  background-color: rgb(68, 78, 88);
 }
 
 .keypad {
@@ -10,8 +13,24 @@
   grid-template-columns: 20px;
 }
 
+.key-button {
+  background-color: rgb(172, 104, 1);
+  border-color: goldenrod;
+  color: aliceblue;
+  margin: 2px;
+  border-radius: 50%;
+  /* font-size: 1.5rem; */
+  height: 3rem;
+  width: 3rem;
+}
+
 .history {
   border: 1px;
-  border-color: black;
+  border-style: solid;
   color: aliceblue;
+  border-radius: 14px;
+  background-color: rgb(90, 101, 111);
+  min-width: 250px;
+  max-width: 250px;
+  margin: 10px;
 }

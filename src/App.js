@@ -49,12 +49,7 @@ function App() {
           <IO className="IO" curIO={curIO} setCurIO={setCurIO} />
         </div>
         <Keypad
-          // className="keypad"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "10px",
-          }}
+          className="keypad"
           onCalc={handleCalc}
           onHandleClear={handleClear}
           onHandleInput={handleInput}
@@ -63,11 +58,7 @@ function App() {
         />
       </div>
       <div className="history">
-        <History
-          className="history"
-          historyArr={historyArr}
-          onPasteHistory={handlePasteHistory}
-        />
+        <History historyArr={historyArr} onPasteHistory={handlePasteHistory} />
       </div>
     </div>
   );
